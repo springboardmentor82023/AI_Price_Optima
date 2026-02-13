@@ -1,0 +1,92 @@
+import pandas as pd
+import numpy as np
+
+# ==============================
+# 1. Load Dataset
+# ==============================
+
+df = pd.read_parquet(
+    r"C:\Users\karth\OneDrive\Desktop\nigerian_retail_and_ecommerce_dynamic_pricing_logs.parquet"
+)
+
+print("✅ Dataset Loaded Successfully!")
+print("Total rows:", len(df))
+
+# ==============================
+# 2. Rename Columns
+# ==============================
+
+df = df.rename(columns={
+    "current_price_ngn": "price",
+    "stock_level": "inventory",
+    "timestamp": "date"
+})
+
+
+# ==============================
+# 3. Generate Sales Quantity
+# ==============================
+
+df["sales_quantity"] = (
+    ((df["price"].max() - df["price"]) / df["price"].max()) * 50
+    + (df["inventory"] / df["inventory"].max()) * 30
+    + np.random.randint(1, 10, len(df))
+).astype(int)
+
+
+# ==============================
+# 4. Convert Date
+# ==============================
+
+df["date"] = pd.to_datetime(df["date"])
+
+
+# ==============================
+# 5. Extract Required Time Features
+# ==============================
+
+# Keep only Day
+df["day"] = df["date"].dt.day
+
+# Add AM / PM column
+df["am_pm"] = df["date"].dt.strftime("%p")
+
+df["hour"] = df["date"].dt.hour
+
+# ==============================
+# 6. Feature Engineering
+# ==============================
+
+df["revenue"] = df["price"] * df["sales_quantity"]
+
+df["stock_status"] = df["inventory"].apply(
+    lambda x: "Low" if x < 100 else "Available"
+)
+
+# ==============================
+# 7. Data Cleaning Checks
+# ==============================
+
+print("Duplicate rows:", df.duplicated().sum())
+print("\nMissing values:\n", df.isnull().sum())
+
+# ==============================
+# 8. Final Dataset
+# ==============================
+
+final_df = df[[
+    "product_id",
+    "price",
+    "sales_quantity",
+    "inventory",
+    "date",
+    "day",
+    "hour",
+    "am_pm",
+    "revenue",
+    "stock_status"
+]]
+final_df.to_csv("final_dynamic_pricing_dataset.csv", index=False)
+
+print("\n✅ Final CSV created successfully!")
+print("Final dataset shape:", final_df.shape)
