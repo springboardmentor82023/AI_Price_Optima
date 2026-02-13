@@ -9,7 +9,7 @@ Total Features: 16
 Data Format: CSV
 This dataset contains daily time-series retail data across multiple stores and products. It includes sales, pricing, inventory, and contextual factors such as weather, promotions, seasonality, and epidemic indicators.
 
-4. Optional Features (Value Addition)
+3. Optional Features (Value Addition)
 The dataset also includes:
 •	Competitor Pricing
 •	Promotion Flag
@@ -20,7 +20,7 @@ The dataset also includes:
 •	Units Ordered
 These additional features strengthen the dataset’s suitability for advanced feature engineering and machine learning modeling.
 
-5. Suitability for Dynamic Pricing
+4. Suitability for Dynamic Pricing
 The dataset enables:
 •	Pricing behavior analysis using Price, Discount, and Competitor Pricing
 •	Demand pattern analysis over time using Date and Seasonality
