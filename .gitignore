@@ -1,8 +1,8 @@
-# Ignore data folders
-data/raw/
+# Ignore generated ingestion outputs
 data/processed/
+data/daily_ingest/
 
-# Ignore python cache
+# Ignore Python cache
 __pycache__/
 *.pyc
 
