@@ -52,14 +52,14 @@ def clean_data():
 
 
 if __name__ == "__main__":
-    df = pd.read_csv(r"C:\Users\Shubm\OneDrive\Desktop\shubham\AI_Price_Optima\retail_store_inventory_cleaned.csv")
+    df = pd.read_csv(r"C:\Users\Shubm\OneDrive\Desktop\shubham\AI_Price_Optima\data\processed\retail_store_inventory_cleaned.csv")
 
     #BASICS
 
-    # print(df.shape)
-    # print(df.head())
-    # df.info()
-    # df.describe()
+    print(df.shape)
+    print(df.head())
+    df.info()
+    df.describe()
 
     #UNIQUE VALUES
 
@@ -70,18 +70,53 @@ if __name__ == "__main__":
 
     #Revenue Analysis
 
-    print("Total Revenue:", df['Revenue'].sum())
-    df.groupby('Category')['Revenue'].sum().sort_values(ascending=False).plot(kind='bar')
+    revenue = df.groupby('Category')['Revenue'].sum().sort_values(ascending=False) / 1_000_000
+
+    ax= revenue.plot(kind='bar')
+    plt.ylabel("Revenue (Millions)")
     plt.title("Revenue by Category")
+    plt.ylim(100, 125) 
+    for p in ax.patches:
+        height = p.get_height()
+        ax.annotate(f'{height:.2f}',
+                    (p.get_x() + p.get_width() / 2., height),
+                    ha='center', va='bottom')
     plt.show()
+
+
+    #Testiing 
+    sns.boxplot(x='Weather Condition', y='Price', data=df)
+    plt.title("Weather Condition vs Price")
+    plt.show()  
+
+    # avg_price = df.groupby("Weather Condition")["Price"].mean()
+
+    # avg_price.plot(kind="bar")
+
+    # plt.title("Average Price by Weather Condition")
+    # plt.ylabel("Average Price")
+    # plt.show()
+
 
     #Price vs Demand
-    sns.scatterplot(x='Price', y='Units Sold', data=df)
+    sns.scatterplot(x='Units Sold', y='Price', data=df)
+    plt.ylabel("Price")     
+    plt.xlabel("Units Sold")
     plt.title("Price vs Units Sold")
+   # plt.ylim(350,500)
     plt.show()
-    print(df[['Price','Units Sold']].corr())
 
+    df_sorted = df.sort_values('Price')
 
+    plt.plot(df_sorted['Price'], df_sorted['Units Sold'])
+    plt.xlabel("Price")
+    plt.ylabel("Units Sold")
+    plt.title("Price vs Units Sold")
+    plt.ylim(350,500)
+    plt.show()
+    
+    print()
+    print()
 
     #Price Elasticity Analysis(E)
     df_sorted = df.sort_values('Price')
@@ -100,7 +135,7 @@ if __name__ == "__main__":
     df_sorted = df_sorted.replace([np.inf, -np.inf], np.nan)
     df_sorted = df_sorted.dropna(subset=['elasticity'])
 
-    print("Average Elasticity:", df_sorted['elasticity'].mean())
+   # print("Average Elasticity:", df_sorted['elasticity'].mean())
 
 
     #Logistic Elasticity
@@ -119,17 +154,21 @@ if __name__ == "__main__":
     print(df[['Competitor Pricing','Units Sold']].corr())
 
 
-    #Inventory Analysis
+    # #Inventory Analysis
 
-    sns.scatterplot(x='Inventory Level', y='Units Sold', data=df)
-    plt.title("Inventory vs Units Sold")
+    sns.lineplot(x='Inventory Level', y='Demand Forecast', data=df)
+    plt.title("Inventory vs Demand Forecast")
     plt.show()
 
 
     #Discount Effect
-    sns.boxplot(x='Discount', y='Units Sold', data=df)
+    # sns.boxplot(x='Discount', y='Units Sold', data=df)
+    df.groupby('Discount')['Units Sold'].mean().plot(kind='bar')
+    plt.xlabel("Discount (%)")
+    plt.ylabel("Average Units Sold")
     plt.title("Discount vs Units Sold")
     plt.show()
+    
 
     #Time and Seasonality Analysis 
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
@@ -141,6 +180,10 @@ if __name__ == "__main__":
     plt.title("Average Monthly Sales")
     plt.show()
 
+    #Revenue over time
+    df.groupby('Date')['Revenue'].sum().plot()
+    plt.title(" Revenue Trend")
+    plt.show()
 
     #Holiday and promotion
     sns.boxplot(x='Holiday/Promotion', y='Units Sold', data=df)
