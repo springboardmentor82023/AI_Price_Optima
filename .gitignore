@@ -1,0 +1,13 @@
+# Ignore generated ingestion outputs
+data/processed/
+data/daily_ingest/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Ignore environment files
+.env
