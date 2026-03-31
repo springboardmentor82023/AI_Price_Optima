@@ -1,6 +1,7 @@
 AI PriceOptima – Dynamic Pricing System
 
-1.Project Overview
+Project Overview
+
 Objective: 
 The objective of this project is to design and implement an AI-powered dynamic pricing system that automatically adjusts product prices based on various influencing factors such as demand, inventory levels, competitor pricing, and seasonal trends.
 The system aims to maximize revenue and improve decision-making by predicting demand and suggesting optimal pricing strategies in real time.
@@ -13,7 +14,9 @@ In traditional retail systems, pricing is often static and manually controlled. 
 4.No data-driven decision-making.
 To overcome these issues, this project introduces a machine learning-based pricing model that adapts dynamically to changing market conditions.
 
-2. Dataset Description
+
+
+Dataset Description
    
 Source of Data:
 The dataset used in this project is synthetically generated using Python libraries such as NumPy and Pandas.
@@ -34,7 +37,8 @@ Target Variable
 Demand → Number of units expected to be sold
 
 
-3. Project Workflow
+
+Project Workflow
 
 1. Data Ingestion: 
    Generated dataset programmatically
@@ -70,7 +74,8 @@ Demand → Number of units expected to be sold
    Visual dashboards for insights
 
 
-4. Model Details
+
+Model Details
    
 Algorithms Considered: 
 XGBoost
@@ -105,7 +110,7 @@ R2 Score - Measures Model Acccuracy
 
 
 
-5. Pricing Strategy
+Pricing Strategy
 
 Rule-Based Pricing:
 Simple logic applied:
@@ -122,7 +127,7 @@ Helps optimize pricing decisions automatically
 
 
 
-6. Results
+Results
 
 Revenue Comparison:
 | Strategy       | Description                 |
@@ -138,7 +143,6 @@ Discounts significantly boost sales
 Competitor pricing directly affects demand
 Seasonal trends influence purchasing behavior
 Inventory availability impacts sales performance
-
 
 
 
@@ -171,6 +175,7 @@ Outputs
 <img width="1920" height="1080" alt="Screenshot (246)" src="https://github.com/user-attachments/assets/8aaeba11-f1e2-4867-ba0f-d27c416cb109" />
 
 
+
 8. Conclusion:
 
 Final Outcomes
@@ -193,6 +198,7 @@ Add customer segmentation
 Improve UI with advanced visualizations
 Deploy on cloud platforms
 Real-time API integration
+
 
 
 9. How to Run the Project
