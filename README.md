@@ -96,9 +96,9 @@ Data was generated/collected and stored in structured format.
 
 ### 📈 Evaluation Metrics
 
-* R² Score
-* MAE (Mean Absolute Error)
-* RMSE (Root Mean Square Error)
+* R² Score --------------------------  0.72
+* MAE (Mean Absolute Error) ---------  30.1
+* RMSE (Root Mean Square Error) -----  31.2
 
 ---
 
@@ -141,9 +141,10 @@ Data was generated/collected and stored in structured format.
 
 ### 📸 Screenshots
 
-<img width="1920" height="876" alt="s1" src="https://github.com/user-attachments/assets/1717a040-40d3-4c65-8d56-57f6a557f941" />
-<img width="1920" height="878" alt="s2" src="https://github.com/user-attachments/assets/44953891-8836-4693-b30d-a3e5bbc6cbbb" />
-<img width="1920" height="832" alt="s3" src="https://github.com/user-attachments/assets/a40341a7-b7a6-47e9-aaf1-98cf897f04be" />
+<img width="1918" height="873" alt="s1" src="https://github.com/user-attachments/assets/337c635d-94e1-403a-86d5-7a261871aca0" />
+<img width="1920" height="868" alt="s2" src="https://github.com/user-attachments/assets/8186eb37-8b4a-4e23-925e-dc9af58d298f" />
+<img width="1917" height="867" alt="s3" src="https://github.com/user-attachments/assets/aeecf64d-7429-4c5e-ae07-4262b7d99933" />
+
 
 
 ---
