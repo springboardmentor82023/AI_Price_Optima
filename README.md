@@ -96,8 +96,8 @@ Data was generated/collected and stored in structured format.
 
 ### 📈 Evaluation Metrics
 
-* R² Score --------------------------  0.72
-* MAE (Mean Absolute Error) ---------  30.1
+* R² Score ----------------------------  0.72
+* MAE (Mean Absolute Error) ----------  30.1
 * RMSE (Root Mean Square Error) -----  31.2
 
 ---
