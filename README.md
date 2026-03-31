@@ -1,11 +1,11 @@
 AI PriceOptima – Dynamic Pricing System
-1.Project Overview
 
-Objective
+1.Project Overview
+Objective: 
 The objective of this project is to design and implement an AI-powered dynamic pricing system that automatically adjusts product prices based on various influencing factors such as demand, inventory levels, competitor pricing, and seasonal trends.
 The system aims to maximize revenue and improve decision-making by predicting demand and suggesting optimal pricing strategies in real time.
 
-Problem Statement
+Problem Statement: 
 In traditional retail systems, pricing is often static and manually controlled. This leads to several inefficiencies:
 1.Loss of revenue during high demand periods.
 2.Overstock issues when demand is low.
@@ -13,7 +13,8 @@ In traditional retail systems, pricing is often static and manually controlled. 
 4.No data-driven decision-making.
 To overcome these issues, this project introduces a machine learning-based pricing model that adapts dynamically to changing market conditions.
 
-2.Dataset Description
+2. Dataset Description
+   
 Source of Data:
 The dataset used in this project is synthetically generated using Python libraries such as NumPy and Pandas.
 It simulates real-world retail/e-commerce scenarios with realistic relationships between features.
@@ -35,34 +36,34 @@ Demand → Number of units expected to be sold
 
 3.Project Workflow
 
-1. Data Ingestion
+1. Data Ingestion: 
    Generated dataset programmatically
    Stored in tabular format (DataFrame)
    Ensured variability in features for better model learning
-2. Data Processing
+2. Data Processing: 
    Converted categorical features into numerical format using encoding
    Normalized and cleaned data
    Removed unnecessary or redundant features
    Ensured consistency across all inputs
-3. Exploratory Data Analysis (EDA)
+3. Exploratory Data Analysis (EDA): 
    EDA was performed to understand patterns and relationships:
    Price vs Demand → Inverse relationship
    Discount vs Demand → Positive relationship
    Inventory vs Demand → Availability impact
    Region & Weather → External influencing factors
    Visualization tools were used to better understand trends and distributions.
-4. Baseline Pricing
+4. Baseline Pricing: 
    A static pricing strategy was implemented where:
    Price remains constant regardless of demand
    Used as a benchmark for comparison with advanced approaches
-5. ML Model Development
+5. ML Model Development: 
    Problem Type: Regression (Demand Prediction)
    Model trained to learn relationship between input features and demand
-   Steps:
+   Steps: 
     Train-test split performed
     Model trained on historical/simulated data
     Predictions generated for unseen inputs
-6. Deployment
+6. Deployment: 
    Built using Streamlit
    Interactive UI with sliders and dropdowns
    Real-time predictions based on user inputs
@@ -71,7 +72,7 @@ Demand → Number of units expected to be sold
 
 4. Model Details
    
-Algorithms Considered
+Algorithms Considered: 
 XGBoost
   Advanced boosting algorithm
   Handles complex feature interactions
@@ -97,7 +98,7 @@ Category
 Region
 Weather
 
-Evaluation Metrics:
+Evaluation Metrics: 
 MAE - Measures Average Error
 MSE - Penalizes large errors
 R2 Score - Measures Model Acccuracy
