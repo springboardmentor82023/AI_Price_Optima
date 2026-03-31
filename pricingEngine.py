@@ -19,11 +19,6 @@ def pricing_engine(row):
     elif month in [3, 10]:
         price *= 0.90
 
-    # Inventory rule
-    if inventory < 200:
-        price *= 1.10
-    elif inventory > 400:
-        price *= 0.92
 
     # Weather rule
     if weather == "Cloudy":
