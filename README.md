@@ -34,7 +34,7 @@ Target Variable
 Demand → Number of units expected to be sold
 
 
-3.Project Workflow
+3. Project Workflow
 
 1. Data Ingestion: 
    Generated dataset programmatically
