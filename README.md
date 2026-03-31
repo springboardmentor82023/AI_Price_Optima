@@ -19,8 +19,7 @@ This project aims to solve this by using **data-driven pricing strategies**.
 
 ### 📍 Source of Data
 
-A synthetic dataset was created to simulate real-world pricing scenarios including demand, inventory, and price variations.
-
+A synthetic dataset of 50,000 samples was created to simulate real-world pricing scenarios, incorporating factors such as demand, inventory levels, and price variations.
 ### 📌 Features Used
 
 * Current Price
@@ -96,9 +95,9 @@ Data was generated/collected and stored in structured format.
 
 ### 📈 Evaluation Metrics
 
-* R² Score ----------------------------  0.72
-* MAE (Mean Absolute Error) ----------  30.1
-* RMSE (Root Mean Square Error) -----  31.2
+R² Score: 0.72
+MAE (Mean Absolute Error): 30.1
+RMSE (Root Mean Square Error): 31.2
 
 ---
 
