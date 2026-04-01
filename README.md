@@ -182,6 +182,7 @@ Consistent revenue improvement
 📌 How to Run the Project
 Step 1 — Clone Repository
 https://github.com/springboardmentor82023/AI_Price_Optima/tree/karthivani?tab=readme-ov-file
+
 Step 2 — Navigate to Project Directory
 cd AI_PRICE_OPTIMA
 
