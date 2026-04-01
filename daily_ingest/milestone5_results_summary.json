@@ -1,0 +1,44 @@
+{
+  "milestone": 5,
+  "objective": "ML-based Dynamic Pricing - Revenue Optimization",
+  "target_variable": "TotalAmount (Revenue)",
+  "test_set_size": 2000,
+  "models": {
+    "XGBoost": {
+      "test_r2": 0.9937851574444843,
+      "test_r2_percent": 99.37851574444842,
+      "test_mae": 35.43128108771324,
+      "test_rmse": 55.842374987059046,
+      "train_r2": 0.9985744535160223,
+      "overfitting_index": 0.004789296071537996,
+      "in_target_range": false
+    },
+    "LightGBM": {
+      "test_r2": 0.9941361131833131,
+      "test_r2_percent": 99.4136113183313,
+      "test_mae": 34.39138434896656,
+      "test_rmse": 54.24273819099912,
+      "train_r2": 0.9974296579712827,
+      "overfitting_index": 0.0032935447879696156,
+      "in_target_range": false
+    }
+  },
+  "best_model": "LightGBM",
+  "best_model_r2": 0.9941361131833131,
+  "best_model_r2_percent": 99.4136113183313,
+  "revenue_comparison": {
+    "static_pricing": 1816548.53,
+    "rule_based_pricing": 1907375.9565,
+    "ml_based_pricing": 1823402.953577643
+  },
+  "revenue_lift": {
+    "rule_based_vs_static_percent": 5.000000000000003,
+    "ml_based_vs_static_percent": 0.3773322575446415,
+    "ml_based_vs_rule_based_percent": -4.402540707100345,
+    "ml_based_advantage": "Needs improvement"
+  },
+  "backtesting": {
+    "mean_absolute_error": 34.39138434896656,
+    "mean_error_percentage": 4.39611439284269
+  }
+}
