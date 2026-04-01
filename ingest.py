@@ -2,105 +2,100 @@ import os
 import pandas as pd
 from datetime import datetime
 
-# ==========================
-# Define Folder Paths
-# ==========================
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+RAW_DIR = "data/raw"
+PROCESSED_DIR = "data/processed"
+DAILY_DIR = "data/daily_ingest"
 
-RAW_FOLDER = os.path.join(BASE_DIR, "data", "raw")
-PROCESSED_FOLDER = os.path.join(BASE_DIR, "data", "processed")
-DAILY_FOLDER = os.path.join(BASE_DIR, "data", "daily_ingest")
+os.makedirs(PROCESSED_DIR, exist_ok=True)
+os.makedirs(DAILY_DIR, exist_ok=True)
 
-REQUIRED_COLUMNS = [
-    "Date",
-    "Store ID",
-    "Product ID",
-    "Category",
-    "Price",
-    "Units Sold"
-]
+today = datetime.today().strftime("%Y-%m-%d")
+today_dir = os.path.join(DAILY_DIR, today)
+os.makedirs(today_dir, exist_ok=True)
 
-# ==========================
-# Validate Required Columns
-# ==========================
-def validate_columns(df):
-    missing = [col for col in REQUIRED_COLUMNS if col not in df.columns]
-    if missing:
-        raise ValueError(f"Missing required columns: {missing}")
-    print("Column validation successful.")
+SALES_REQUIRED = {
+    "OrderID", "OrderDate", "CustomerID", "ProductID", "Quantity",
+    "UnitPrice", "Discount", "Tax", "ShippingCost", "TotalAmount",
+    "PaymentMethod", "OrderStatus", "City", "State", "Country"
+}
 
+INVENTORY_REQUIRED = {
+    "ProductID", "ProductName", "Category", "Brand", "SellerID"
+}
 
-# ==========================
-# Clean Data
-# ==========================
-def clean_data(df):
+def clean_sales(df: pd.DataFrame) -> pd.DataFrame:
+    missing_cols = SALES_REQUIRED - set(df.columns)
+    if missing_cols:
+        raise ValueError(f"Sales data missing columns: {missing_cols}")
 
-    # Convert Date
-    if "Date" in df.columns:
-        df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
-
-    # Remove duplicates
     df = df.drop_duplicates()
 
-    # Handle numeric missing values
-    numeric_cols = df.select_dtypes(include="number").columns
-    for col in numeric_cols:
-        df[col].fillna(df[col].median(), inplace=True)
+    # Type corrections
+    df["OrderDate"] = pd.to_datetime(df["OrderDate"], errors="coerce")
+    for col in ["Quantity", "UnitPrice", "Discount", "Tax", "ShippingCost", "TotalAmount"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
 
-    # Handle categorical missing values
-    categorical_cols = df.select_dtypes(include="object").columns
-    for col in categorical_cols:
-        df[col].fillna(df[col].mode()[0], inplace=True)
+    # Missing value handling (basic + safe)
+    df["Quantity"] = df["Quantity"].fillna(1)
+    df["UnitPrice"] = df["UnitPrice"].fillna(df["UnitPrice"].median())
+    df["Discount"] = df["Discount"].fillna(0)
+    df["Tax"] = df["Tax"].fillna(0)
+    df["ShippingCost"] = df["ShippingCost"].fillna(0)
+    df["TotalAmount"] = df["TotalAmount"].fillna(
+        df["Quantity"] * df["UnitPrice"]
+    )
+
+    # Categorical fills
+    for col in ["PaymentMethod", "OrderStatus", "City", "State", "Country"]:
+        df[col] = df[col].fillna("Unknown")
 
     return df
 
+def clean_inventory(df: pd.DataFrame) -> pd.DataFrame:
+    missing_cols = INVENTORY_REQUIRED - set(df.columns)
+    if missing_cols:
+        raise ValueError(f"Inventory data missing columns: {missing_cols}")
 
-# ==========================
-# Process File
-# ==========================
-def process_file(filename):
+    df = df.drop_duplicates()
 
-    file_path = os.path.join(RAW_FOLDER, filename)
+    # Fill basic missing values
+    for col in ["ProductName", "Category", "Brand", "SellerID"]:
+        df[col] = df[col].fillna("Unknown")
 
-    if not os.path.exists(file_path):
-        print(f"{filename} not found in raw folder.")
-        return
+    return df
 
-    print("File loaded successfully.")
+def main():
+    try:
+        sales_path = os.path.join(RAW_DIR, "sales_data.csv")
+        sales_df = pd.read_csv(sales_path)
+        print("✅ Sales data loaded successfully")
 
-    df = pd.read_csv(file_path)
+        sales_cleaned = clean_sales(sales_df)
+        sales_cleaned.to_csv(os.path.join(PROCESSED_DIR, "sales_cleaned.csv"), index=False)
+        sales_cleaned.to_csv(os.path.join(today_dir, "sales_cleaned.csv"), index=False)
+        print("✅ Sales data cleaned and saved")
 
-    validate_columns(df)
+    except Exception as e:
+        print("❌ Error processing sales data:", e)
 
-    df_clean = clean_data(df)
+    try:
+        inv_path = os.path.join(RAW_DIR, "inventory_data.csv")
+        if os.path.exists(inv_path):
+            inv_df = pd.read_csv(inv_path)
+            print("✅ Inventory data loaded successfully")
 
-    print("Data cleaning completed.")
+            inv_cleaned = clean_inventory(inv_df)
+            inv_cleaned.to_csv(os.path.join(PROCESSED_DIR, "inventory_cleaned.csv"), index=False)
+            inv_cleaned.to_csv(os.path.join(today_dir, "inventory_cleaned.csv"), index=False)
+            print("✅ Inventory data cleaned and saved")
+        else:
+            print("⚠️ inventory_data.csv not found — skipping inventory ingestion")
 
-    # Save to processed folder
-    processed_path = os.path.join(PROCESSED_FOLDER, f"cleaned_{filename}")
-    df_clean.to_csv(processed_path, index=False)
+    except Exception as e:
+        print("❌ Error processing inventory data:", e)
 
-    print("Processed file saved.")
+    print("🎯 Ingestion completed")
 
-    # Create daily folder
-    today = datetime.now().strftime("%Y-%m-%d")
-    daily_path = os.path.join(DAILY_FOLDER, today)
-
-    os.makedirs(daily_path, exist_ok=True)
-
-    daily_file = os.path.join(daily_path, f"cleaned_{filename}")
-    df_clean.to_csv(daily_file, index=False)
-
-    print("Daily ingestion file saved.")
-
-
-# ==========================
-# Main Execution
-# ==========================
 if __name__ == "__main__":
-
-    print("Starting Ingestion Pipeline...\n")
-
-    process_file("sales_data.csv")
-
-    print("\nIngestion completed successfully.")
+    main()
+   
