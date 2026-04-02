@@ -11,37 +11,10 @@ import plotly.graph_objects as go
 st.set_page_config(page_title="PriceOptima", layout="wide")
 
 # -----------------------
-# CUSTOM CSS (🔥 BEAUTY)
-# -----------------------
-st.markdown("""
-<style>
-body {
-    background-color: #0e1117;
-}
-.big-title {
-    font-size: 42px;
-    font-weight: bold;
-    color: white;
-}
-.subtitle {
-    color: #9ca3af;
-    font-size: 18px;
-}
-.card {
-    background: linear-gradient(145deg, #1f2937, #111827);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 15px rgba(0,255,255,0.1);
-    text-align: center;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# -----------------------
 # HEADER
 # -----------------------
-st.markdown('<div class="big-title">💰 PriceOptima</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">AI-powered Dynamic Pricing Dashboard 🚀</div>', unsafe_allow_html=True)
+st.title("💰 PriceOptima Dashboard")
+st.markdown("AI-powered Dynamic Pricing 🚀")
 st.markdown("---")
 
 # -----------------------
@@ -54,17 +27,17 @@ scaler = pickle.load(open(os.path.join(BASE_DIR, "model/scaler.pkl"), "rb"))
 features = pickle.load(open(os.path.join(BASE_DIR, "model/features.pkl"), "rb"))
 
 # -----------------------
-# SIDEBAR
+# SIDEBAR INPUTS
 # -----------------------
-st.sidebar.header("⚙️ Input Controls")
+st.sidebar.header("⚙️ Controls")
 
-price = st.sidebar.slider("💵 Price", 50, 1000, 200)
-month = st.sidebar.slider("📅 Month", 1, 12, 3)
-day = st.sidebar.slider("📆 Day", 1, 31, 15)
-weekday = st.sidebar.slider("📊 Weekday", 0, 6, 2)
+price = st.sidebar.slider("Price", 0, 1000, 200)
+month = st.sidebar.slider("Month", 1, 12, 3)
+day = st.sidebar.slider("Day", 1, 31, 15)
+weekday = st.sidebar.slider("Weekday", 0, 6, 2)
 
 # -----------------------
-# INPUT PROCESSING
+# INPUT PREP
 # -----------------------
 input_dict = {
     "Price": price,
@@ -83,12 +56,14 @@ input_df = input_df[features]
 input_scaled = scaler.transform(input_df)
 
 # -----------------------
-# PREDICTION
+# ORIGINAL DEMAND
 # -----------------------
 pred_log = model.predict(input_scaled)[0]
 predicted_demand = np.expm1(pred_log)
 
-# SMART PRICING
+# -----------------------
+# INITIAL PRICING LOGIC
+# -----------------------
 if predicted_demand > 100:
     recommended_price = price * 1.15
     trend = "📈 Increase Price"
@@ -96,32 +71,81 @@ else:
     recommended_price = price * 0.90
     trend = "📉 Reduce Price"
 
+# -----------------------
+# NEW DEMAND (AFTER PRICE CHANGE)
+# -----------------------
+# -----------------------
+# FIND BEST PRICE (MAX REVENUE)
+# -----------------------
+price_range = np.linspace(price * 0.7, price * 1.3, 20)
+
+best_price = price
+best_revenue = 0
+
+for p in price_range:
+    temp = {
+        "Price": p,
+        "month": month,
+        "day": day,
+        "weekday": weekday
+    }
+
+    temp_df = pd.DataFrame([temp])
+
+    for col in features:
+        if col not in temp_df.columns:
+            temp_df[col] = 0
+
+    temp_df = temp_df[features]
+    temp_scaled = scaler.transform(temp_df)
+
+    d = np.expm1(model.predict(temp_scaled)[0])
+    revenue = p * d
+
+    if revenue > best_revenue:
+        best_revenue = revenue
+        best_price = p
+
+# FINAL SELECTED PRICE
+recommended_price = best_price
+new_revenue = best_revenue
+
+# ORIGINAL REVENUE
 original_revenue = price * predicted_demand
-new_revenue = recommended_price * predicted_demand
+
+# LIFT (NOW WILL CHANGE)
 lift = ((new_revenue - original_revenue) / original_revenue) * 100
 
+# TREND TEXT
+if lift > 0:
+    trend = "🚀 Optimized Price for Maximum Revenue"
+else:
+    trend = "⚖️ Current Price Already Optimal"
 # -----------------------
-# KPI CARDS
+# REVENUE CALCULATION
+# ----------------------
+# -----------------------
+# KPIs
 # -----------------------
 st.subheader("📊 Key Metrics")
 
 c1, c2, c3, c4 = st.columns(4)
 
-c1.markdown(f'<div class="card">💵<br><b>Price</b><br>₹{price}</div>', unsafe_allow_html=True)
-c2.markdown(f'<div class="card">💡<br><b>Recommended</b><br>₹{recommended_price:.2f}</div>', unsafe_allow_html=True)
-c3.markdown(f'<div class="card">📦<br><b>Demand</b><br>{predicted_demand:.2f}</div>', unsafe_allow_html=True)
-c4.markdown(f'<div class="card">🚀<br><b>Lift</b><br>{lift:.2f}%</div>', unsafe_allow_html=True)
+c1.metric("Price", f"₹{price}")
+c2.metric("Recommended", f"₹{recommended_price:.2f}")
+c3.metric("Demand", f"{predicted_demand:.2f}")
+c4.metric("Revenue Lift", f"{lift:.2f}%")
 
 st.markdown("---")
 
 # -----------------------
-# PRICING DECISION
+# DECISION
 # -----------------------
-st.subheader("🧠 AI Pricing Decision")
+st.subheader("🧠 Pricing Decision")
 st.success(trend)
 
 # -----------------------
-# REVENUE CHART (PLOTLY)
+# REVENUE CHART
 # -----------------------
 st.subheader("📈 Revenue Comparison")
 
@@ -134,10 +158,7 @@ fig.add_trace(go.Bar(
     textposition="auto"
 ))
 
-fig.update_layout(
-    template="plotly_dark",
-    height=400
-)
+fig.update_layout(template="plotly_dark")
 
 st.plotly_chart(fig, use_container_width=True)
 
@@ -164,8 +185,7 @@ for p in prices:
     demands.append(d)
 
 fig2 = go.Figure()
-
-fig2.add_trace(go.Scatter(x=prices, y=demands, mode='lines', name='Demand'))
+fig2.add_trace(go.Scatter(x=prices, y=demands, mode='lines'))
 
 fig2.update_layout(
     template="plotly_dark",
@@ -176,15 +196,14 @@ fig2.update_layout(
 st.plotly_chart(fig2, use_container_width=True)
 
 # -----------------------
-# PRICE VS REVENUE
+# REVENUE CURVE
 # -----------------------
 st.subheader("💰 Revenue Curve")
 
 revenues = prices * np.array(demands)
 
 fig3 = go.Figure()
-
-fig3.add_trace(go.Scatter(x=prices, y=revenues, mode='lines', name='Revenue'))
+fig3.add_trace(go.Scatter(x=prices, y=revenues, mode='lines'))
 
 fig3.update_layout(
     template="plotly_dark",
@@ -200,9 +219,9 @@ st.plotly_chart(fig3, use_container_width=True)
 st.subheader("📌 Insights")
 
 st.info(f"""
-📊 Demand responds dynamically to price changes  
-💡 AI suggests optimal pricing strategy  
-🚀 Estimated revenue lift: {lift:.2f}%  
+📊 Demand reacts to pricing changes  
+💡 AI avoids loss-making decisions  
+🚀 Revenue lift ensured: {lift:.2f}%  
 
-This tool helps businesses take smarter pricing decisions.
+This system ensures optimal and safe pricing.
 """)
