@@ -1,0 +1,34 @@
+1. Project Objective
+The objective of the Price Optima project is to design and implement a machine learning–based dynamic pricing system that adjusts product prices based on demand patterns, inventory levels, competitor pricing, and external factors. The system aims to maximize revenue while maintaining competitiveness and inventory efficiency.
+
+2. Dataset Selected
+Dataset Name: Retail Store Inventory and Demand Forecasting
+Source: Kaggle
+Total Records: 76,000
+Total Features: 16
+Data Format: CSV
+This dataset contains daily time-series retail data across multiple stores and products. It includes sales, pricing, inventory, and contextual factors such as weather, promotions, seasonality, and epidemic indicators.
+
+3. Optional Features (Value Addition)
+The dataset also includes:
+•	Competitor Pricing
+•	Promotion Flag
+•	Weather Condition
+•	Region
+•	Seasonality
+•	Epidemic Indicator
+•	Units Ordered
+These additional features strengthen the dataset’s suitability for advanced feature engineering and machine learning modeling.
+
+4. Suitability for Dynamic Pricing
+The dataset enables:
+•	Pricing behavior analysis using Price, Discount, and Competitor Pricing
+•	Demand pattern analysis over time using Date and Seasonality
+•	Sales performance tracking using Units Sold
+•	Inventory-aware pricing using Inventory Level
+•	Revenue optimization using price-demand relationships
+It is suitable for:
+•	Exploratory Data Analysis (EDA)
+•	Feature Engineering
+•	Demand Forecasting
+•	Machine Learning–based Dynamic Price Optimization
