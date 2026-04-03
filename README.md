@@ -33,18 +33,21 @@ This project solves the problem by building a **smart pricing engine** that cont
 ## 📊 Dataset Description
 
 - **Source**: Kaggle  
-  https://www.kaggle.com/datasets/aliiihussain/amazon-sales-dataset
+  https://www.kaggle.com/datasets/tanishkagoyal1/retail-sales-inventory-dataset
 
 - **Description**:  
-  A realistic Amazon-style e-commerce dataset containing:
+  A realistic retail dataset representing sales and inventory behavior across different products.
 
-  - Time-series sales data
-  - Product pricing & discounts
-  - Customer regions & payment methods
-  - Ratings and reviews
-  - Revenue metrics
+  It includes:
 
-- **Duration**: 2 years of sales data
+  - Product-level sales data  
+  - Pricing information  
+  - Inventory levels and stock availability  
+  - Time-based sales records  
+  - Demand (units sold) patterns  
+
+- **Duration**:  
+  Multiple time-period records enabling trend analysis and demand forecasting
 
 ---
 
@@ -128,9 +131,9 @@ Key analyses performed:
 
 
 #### 🔹 Evaluation Metrics:
-- MAE (Mean Absolute Error)
-- RMSE (Root Mean Squared Error)
-- R² Score
+- MAE (Mean Absolute Error) - 69.2
+- RMSE (Root Mean Squared Error) - 89.1
+- R² Score - 0.32
 
 ---
 
