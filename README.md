@@ -188,7 +188,17 @@ Key analyses performed:
 
 ---
 
-## 🖥️ Application Demo
+## 📸 Dashboard Screenshots
+
+<img src="https://github.com/springboardmentor82023/AI_Price_Optima/blob/main/Screenshot%20(5).png?raw=true" width="100%" />
+
+<img src="https://github.com/springboardmentor82023/AI_Price_Optima/blob/main/Screenshot%20(9).png?raw=true" width="100%" />
+
+<img src="https://github.com/springboardmentor82023/AI_Price_Optima/blob/main/Screenshot%20(10).png?raw=true" width="100%" />
+
+<img src="https://github.com/springboardmentor82023/AI_Price_Optima/blob/main/Screenshot%20(12).png?raw=true" width="100%" />
+
+---
 
 ### Inputs:
 - Price
