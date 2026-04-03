@@ -202,17 +202,16 @@ Key analyses performed:
 
 ### Inputs:
 - Price
-- Discount %
-- Inventory Level
-- Rating & Reviews
-- Product Category
-- Region
-- Payment Method
-- Date
-
+- Inventory
+- Month
+- Weekday
+- 
 ### Outputs:
-- Predicted Demand
-- Recommended Optimal Price
+- Recommended Price
+- Demand
+- Revenue
+- Revenue Lift
+- Graphs
 
 ---
 
