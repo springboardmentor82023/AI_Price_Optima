@@ -1,212 +1,216 @@
-# 💰 AI-Based Dynamic Pricing System
+# 🚀 AI PriceOptima – Dynamic Pricing System
 
 ---
 
 ## 📌 Project Overview
 
 ### 🎯 Objective
-The objective of this project is to build an AI-powered dynamic pricing system that adjusts product prices based on demand, inventory, and market conditions to maximize revenue.
 
----
+The objective of this project is to develop an intelligent **dynamic pricing system** that recommends optimal product prices using machine learning to maximize revenue.
 
-## ❗ Problem Statement
-Businesses often use static pricing, which does not adapt to changing demand or stock levels.  
-This project solves that by implementing:
+### ❗ Problem Statement
 
-- Rule-based pricing  
-- Machine learning-based pricing  
-- Real-time price recommendations  
+Traditional static pricing fails to adapt to market demand, inventory levels, and customer behavior. This leads to revenue loss and inefficient pricing decisions.
+This project aims to solve this by using **data-driven pricing strategies**.
 
 ---
 
 ## 📊 Dataset Description
 
-### 📥 Source
-Dataset sourced from Kaggle
+### 📍 Source of Data
 
+A synthetic dataset of 50,000 samples was created to simulate real-world pricing scenarios, incorporating factors such as demand, inventory levels, and price variations.
 ### 📌 Features Used
-- Product ID / Category  
-- Price  
-- Competitor Price  
-- Demand (Units Sold)  
-- Inventory Level  
-- Date (for time-based analysis)  
+
+* Current Price
+* Inventory Level
+* Demand Factor
+* Predicted Demand (Target Variable)
 
 ---
 
 ## 🔄 Project Workflow
 
 ### 1️⃣ Data Ingestion
-- Raw data stored in `data/raw/`  
-- Cleaned data stored in `data/processed/`  
-- Daily ingestion simulated in `data/daily_ingest/`  
 
----
+Data was generated/collected and stored in structured format.
 
 ### 2️⃣ Data Processing
-- Missing values handled  
-- Duplicates removed  
-- Data types corrected  
 
----
+* Cleaned dataset
+* Removed inconsistencies
+* Prepared input-output structure
 
 ### 3️⃣ Exploratory Data Analysis (EDA)
-- Price vs Demand analysis  
-- Sales trends over time  
-- Revenue patterns  
-- Inventory vs Sales relationship  
 
----
+* Relationship between price and demand analyzed
+* Demand variation studied with inventory
+* Revenue patterns observed
 
-### 4️⃣ Baseline Pricing (Rule-Based)
+### 4️⃣ Baseline Pricing
 
-Implemented simple business rules:
-
-- Weekend → Increase price  
-- Low inventory → Increase price  
-- High inventory → Decrease price  
-
----
+* Static pricing used as baseline
+* Fixed price regardless of demand
 
 ### 5️⃣ ML Model Development
 
-#### 📌 Models Used:
-- XGBoost  
-- LightGBM  
+* Models used:
 
-#### 🎯 Target:
-- Predict demand (quantity sold)
-
----
+  * LightGBM
+  * XGBoost
+* Model trained to predict demand
 
 ### 6️⃣ Deployment
-Built an interactive **Streamlit dashboard**
 
-Users can:
-- Enter product details  
-- Get price recommendations  
-- View revenue insights  
+* Model deployed using **Streamlit dashboard**
+* Interactive UI created for business users
 
 ---
 
 ## 🤖 Model Details
 
-### 🔹 XGBoost
-- Gradient boosting algorithm  
-- Handles structured data efficiently  
-- Provides high accuracy  
+### 📌 Algorithms Used
 
-### 🔹 LightGBM
-- Faster and optimized boosting model  
-- Works well with large datasets  
+#### 🔹 XGBoost
 
----
+* Gradient boosting algorithm
+* Handles non-linear relationships effectively
+* High accuracy and performance
 
-### 📥 Features Used in Model
-- Price  
-- Inventory Level  
-- Competitor Price  
-- Demand Index  
-- Time-based features  
+#### 🔹 LightGBM
+
+* Faster and efficient boosting model
+* Works well with large datasets
+* Low memory usage
 
 ---
 
-### 📏 Evaluation Metrics
-- MAE (Mean Absolute Error)  
-- RMSE (Root Mean Squared Error)  
-- R² Score  
+### 📊 Features Used
+
+* Price
+* Inventory
+* Demand Factor
+
+---
+
+### 📈 Evaluation Metrics
+
+* R² Score: 0.72
+* MAE (Mean Absolute Error): 30.1
+* RMSE (Root Mean Square Error): 31.2
 
 ---
 
 ## 💡 Pricing Strategy
 
 ### 🔹 Rule-Based Pricing
-- Based on predefined business logic  
-- Easy to implement  
-- Less accurate  
+
+* Fixed increase in price based on demand
+* Example: Price + 10%
 
 ### 🔹 ML-Based Pricing
-- Uses demand prediction  
-- Adjusts price dynamically  
-- Optimizes revenue  
+
+* Predict demand using ML model
+* Adjust price dynamically
+* Optimize revenue
 
 ---
 
-## 📈 Results
+## 📊 Results
 
 ### 💰 Revenue Comparison
 
-| Strategy | Description |
-|--------|------------|
-| Static Pricing | No change in price |
-| Rule-Based Pricing | Price adjusted using rules |
-| ML-Based Pricing | Price optimized using ML |
+| Strategy   | Revenue           |
+| ---------- | ----------------- |
+| Static     | Base              |
+| Rule-Based | Moderate Increase |
+| ML-Based   | Highest Revenue   |
 
 ---
 
-## 🚀 Key Insights
+### 🔍 Key Insights
 
-- Demand decreases when price increases (price sensitivity)  
-- Weekend sales are higher  
-- Low inventory leads to higher pricing opportunities  
-- Few products generate majority of revenue  
-- ML-based pricing improves revenue compared to static pricing  
+* ML-based pricing gives better revenue
+* Demand-driven pricing is more effective
+* Inventory impacts pricing flexibility
 
 ---
 
-## 🖥 Application / Demo
+## 🖥️ Application / Demo
 
-### 📊 Streamlit Dashboard Features
-- User input panel  
-- Price recommendation  
-- Demand prediction  
-- Revenue comparison  
+### 📸 Screenshots
+
+<img width="1918" height="873" alt="s1" src="https://github.com/user-attachments/assets/337c635d-94e1-403a-86d5-7a261871aca0" />
+<img width="1920" height="868" alt="s2" src="https://github.com/user-attachments/assets/8186eb37-8b4a-4e23-925e-dc9af58d298f" />
+<img width="1917" height="867" alt="s3" src="https://github.com/user-attachments/assets/aeecf64d-7429-4c5e-ae07-4262b7d99933" />
+
+
 
 ---
 
-### 📥 Inputs
-- Price  
-- Inventory  
-- Competitor Price  
-- Demand Index  
-- Date  
+### ⚙️ Inputs
+
+* Product Selection
+* Current Price
+* Inventory Level
+* Demand Factor
 
 ---
 
 ### 📤 Outputs
-- Recommended Price  
-- Expected Demand  
-- Expected Revenue  
+
+* Recommended Price
+* Expected Demand
+* Expected Revenue
+* Revenue Improvement
 
 ---
 
 ## ✅ Conclusion
 
-### 🎯 Final Outcomes
-- Built a complete pricing pipeline  
-- Implemented rule-based and ML-based pricing  
-- Achieved improved revenue performance  
+### 📌 Final Outcomes
+
+* Built a complete dynamic pricing system
+* Successfully integrated ML model
+* Developed an interactive dashboard
 
 ---
 
 ### 📚 Learnings
-- Importance of EDA in pricing  
-- Impact of demand and inventory on pricing  
-- Practical use of ML in business problems  
+
+* Machine learning deployment
+* Streamlit UI development
+* Business-oriented analytics
 
 ---
 
-### 🔮 Future Improvements
-- Add real-time data integration  
-- Use advanced deep learning models  
-- Include customer segmentation  
-- Integrate competitor tracking APIs  
+## 🔮 Future Improvements
+
+* Use real-world datasets
+* Add deep learning models
+* Integrate real-time pricing
+* Deploy on cloud
 
 ---
 
-## ⚙️ How to Run the Project
+## ▶️ How to Run the Project
 
-### 🔧 Step 1: Clone Repository
+### 🔧 Step 1: Install Dependencies
+
 ```bash
-git clone <your-repo-link>
-cd Dynamic_Pricing_App
+pip install numpy pandas scikit-learn streamlit plotly
+```
+
+### ▶️ Step 2: Run Application
+
+```bash
+streamlit run app.py
+```
+
+### 🌐 Step 3: Open Browser
+
+```
+http://localhost:8501
+```
+
+---
