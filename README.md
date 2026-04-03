@@ -95,9 +95,9 @@ Data was generated/collected and stored in structured format.
 
 ### 📈 Evaluation Metrics
 
-* R² Score: 0.72
-* MAE (Mean Absolute Error): 30.1
-* RMSE (Root Mean Square Error): 31.2
+* R² Score
+* MAE (Mean Absolute Error)
+* RMSE (Root Mean Square Error)
 
 ---
 
@@ -133,19 +133,7 @@ Data was generated/collected and stored in structured format.
 * ML-based pricing gives better revenue
 * Demand-driven pricing is more effective
 * Inventory impacts pricing flexibility
-
----
-
-## 🖥️ Application / Demo
-
-### 📸 Screenshots
-
-<img width="1918" height="873" alt="s1" src="https://github.com/user-attachments/assets/337c635d-94e1-403a-86d5-7a261871aca0" />
-<img width="1920" height="868" alt="s2" src="https://github.com/user-attachments/assets/8186eb37-8b4a-4e23-925e-dc9af58d298f" />
-<img width="1917" height="867" alt="s3" src="https://github.com/user-attachments/assets/aeecf64d-7429-4c5e-ae07-4262b7d99933" />
-
-
-
+  
 ---
 
 ### ⚙️ Inputs
