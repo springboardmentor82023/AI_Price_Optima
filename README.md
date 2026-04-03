@@ -43,6 +43,11 @@ Retail Store Inventory Dataset
 
 File Used: retail_store_inventory.csv
 
+**Dataset Size:**
+- Total Rows: 51290  
+- Total Columns: 27  
+
+
 
 ---
 
@@ -62,73 +67,6 @@ The following features were used to train the machine learning models:
 
 ---
 
-# 🔄 Project Workflow
-
-## 1️⃣ Data Ingestion
-
-- Loaded dataset using **Pandas**
-- Verified missing values
-- Checked data types
-- Ensured dataset consistency
-
----
-
-## 2️⃣ Data Processing
-
-Performed:
-
-- Handling missing values
-- Feature engineering
-- Feature scaling
-- Train-test split
-
-Libraries used:
-
-- Pandas
-- NumPy
-- Scikit-learn
-
----
-
-## 3️⃣ Exploratory Data Analysis (EDA)
-
-Performed:
-
-- Demand distribution analysis
-- Price vs Demand visualization
-- Monthly demand trends
-- Correlation analysis
-
-Libraries used:
-
-- Matplotlib
-- Seaborn
-
----
-
-## 4️⃣ Baseline Pricing
-
-Implemented:
-
-- Static pricing logic
-- Traditional revenue calculation
-
-Formula used:  
----
-
-## 📌 Features Used
-
-The following features were used to train the machine learning models:
-
-- **Price**
-- **Discount**
-- **Shipping Cost**
-- **Month**
-- **Day of Week**
-
-### 🎯 Target Variable:
-
-- **Demand**
 
 ---
 
@@ -207,25 +145,6 @@ Steps performed:
 Best model saved as:  
 Used as baseline for comparison.
 
----
-
-## 5️⃣ Machine Learning Model Development
-
-Models trained:
-
-- **XGBoost**
-- **LightGBM**
-
-Steps performed:
-
-- Model training
-- Hyperparameter tuning
-- Performance evaluation
-- Model comparison
-
-Best model saved as:
-
-Used as baseline for comparison.
 
 ---
 
@@ -282,6 +201,14 @@ Models were evaluated using:
 - Mean Absolute Error (**MAE**)
 - Mean Squared Error (**MSE**)
 - R² Score
+
+### Model Performance:
+
+| Model | MAE | RMSE | R² Score |
+|------|-----|------|-----------|
+| XGBoost | 1.12 | 1.64 | 0.46 |
+| LightGBM | 1.20 | 1.64 | 0.47 |
+| Baseline Model | 1.85 | 2.20 | 0.72 |
 
 The best-performing model was selected for deployment.
 
