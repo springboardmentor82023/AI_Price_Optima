@@ -1,248 +1,360 @@
-# 💰 AI-Based Dynamic Pricing System
 
-## 📌 Project Overview
+PROJECT WORK BY :MAHALAKSHMI AVNK
 
-### 🎯 Objective
+💰 AI: PriceOptima – Dynamic Pricing System
 
-The objective of this project is to build an **AI-powered dynamic pricing system** that adjusts product prices based on demand, inventory, and market conditions to maximize revenue.
+ 1. Project Overview
 
-### ❗ Problem Statement
+AI: PriceOptima is an intelligent, data-driven dynamic pricing system designed to optimize product pricing in retail environments.
 
-Businesses often use **static pricing**, which does not adapt to changing demand or stock levels.
-This project solves that by implementing:
+The system leverages:
 
-* Rule-based pricing
-* Machine learning-based pricing
-* Real-time price recommendations
+* Historical sales data
+* Inventory levels
+* Market conditions
+
+to dynamically adjust prices and maximize revenue while maintaining competitiveness.
+
+
+
+ ❗ 2. Problem Statement
+
+Traditional retail systems rely on **static pricing**, which does not adapt to changing market conditions such as demand fluctuations, stock availability, or competitor pricing.
+
+This results in:
+
+* Missed revenue opportunities
+* Overstocking or stockouts
+* Poor responsiveness to market trends
+
+👉 **Solution:**
+Develop an **AI-based dynamic pricing system** that adjusts prices using:
+
+* Rule-based logic
+* Machine learning models
+* Real-time insights
 
 ---
 
-## 📊 Dataset Description
+🎯 3. Project Objectives
 
-### 📥 Source
+* Build a **data pipeline** for structured retail data processing
+* Analyze demand and pricing behavior using EDA
+* Develop a **rule-based pricing engine**
+* Train **machine learning models** to predict demand
+* Optimize pricing using ML predictions
+* Deploy the system using an **interactive dashboard**
+* Demonstrate **revenue improvement**
 
-* Dataset sourced from **Kaggle**
+---
 
-### 📌 Features Used
+ 📊 4. Dataset Overview
 
-* Product ID / Category
-* Price
-* Competitor Price
-* Demand (Units Sold)
+The project uses the **Retail Store Inventory Forecasting Dataset**.
+
+ 📌 Key Details
+
+* Records: 73,100
+* Features: 15
+* Granularity: Daily (Store × Product level)
+
+ 📊 Important Features
+
+* Product ID, Category
+* Price, Discount, Competitor Price
+* Units Sold (Demand)
 * Inventory Level
-* Date (for time-based analysis)
+* Date (Time-based analysis)
+* Weather, Promotion, Seasonality
+
+👉 The dataset satisfies all requirements for **dynamic pricing and demand forecasting**.
 
 ---
 
-## 🔄 Project Workflow
+ 🔄 5. Project Workflow
 
-### 1️⃣ Data Ingestion
-
-* Raw data stored in `data/raw/`
-* Cleaned data stored in `data/processed/`
-* Daily ingestion simulated in `data/daily_ingest/`
-
----
-
-### 2️⃣ Data Processing
-
-* Missing values handled
-* Duplicates removed
-* Data types corrected
+```text
+Data Ingestion → Data Processing → EDA → 
+Rule-Based Pricing → ML Models → 
+Pricing Engine → Dashboard
+```
 
 ---
 
-### 3️⃣ Exploratory Data Analysis (EDA)
-
-* Price vs Demand analysis
-* Sales trends over time
-* Revenue patterns
-* Inventory vs Sales relationship
+⚙️ 6. Milestone-wise Implementation
 
 ---
 
-### 4️⃣ Baseline Pricing (Rule-Based)
+🔹 Milestone 1: Data Preparation
 
-Implemented simple business rules:
+ ✔ Work Done
 
-* Weekend → Increase price
-* Low inventory → Increase price
-* High inventory → Decrease price
+* Selected a **Kaggle retail dataset**
+* Verified mandatory features
+* Defined pricing and demand objectives
 
----
+✔ Outcome
 
-### 5️⃣ ML Model Development
-
-* Trained models:
-
-  * XGBoost
-  * LightGBM
-
-* Target:
-
-  * Predict **demand (quantity sold)**
+* Dataset approved and ready for pipeline
 
 ---
 
-### 6️⃣ Deployment
+🔹 Milestone 2: Data Ingestion Pipeline
 
-* Built an interactive **Streamlit dashboard**
-* Users can:
+⚙️ Implementation
 
-  * Enter product details
-  * Get price recommendations
-  * View revenue insights
+* Developed `ingest.py` using Pandas
+* Organized folder structure:
 
----
+  
+  data/
+  ├── raw/
+  ├── processed/
+  └── daily_ingest/
+  
 
-## 🤖 Model Details
+ 🔄 Pipeline Steps
 
-### 📌 Models Used
+* Loaded raw data
+* Validated dataset
+* Removed duplicates
+* Handled missing values
+* Saved cleaned data
+* Created **date-wise ingestion folders**
 
-#### 🔹 XGBoost
+ ✔ Result
 
-* Gradient boosting algorithm
-* Handles structured data efficiently
-* Provides high accuracy
-
-#### 🔹 LightGBM
-
-* Faster and optimized boosting model
-* Works well with large datasets
-
----
-
-### 📥 Features Used in Model
-
-* Price
-* Inventory Level
-* Competitor Price
-* Demand Index
-* Time-based features
+* Built a **robust, repeatable ingestion pipeline**
+* Simulated real-world daily data processing
 
 ---
 
-### 📏 Evaluation Metrics
+🔹 Milestone 3: Exploratory Data Analysis (EDA)
 
-* MAE (Mean Absolute Error)
-* RMSE (Root Mean Squared Error)
-* R² Score
+ 📊 Analysis Performed
 
----
+* Demand trends over time
+* Price vs demand relationship
+* Revenue analysis
+* Correlation heatmap
+* Product-level performance
 
-## 💡 Pricing Strategy
+🔍 Key Insights
 
-### 🔹 Rule-Based Pricing
+* Demand decreases when price increases
+* Sales vary across time (seasonality present)
+* Few products generate most revenue
+* Inventory affects sales performance
+* Revenue depends on both price and demand
 
-* Based on predefined business logic
-* Easy to implement
-* Less accurate
+ ✔ Result
 
----
-
-### 🔹 ML-Based Pricing
-
-* Uses demand prediction
-* Adjusts price dynamically
-* Optimizes revenue
-
----
-
-## 📈 Results
-
-### 💰 Revenue Comparison
-
-| Strategy           | Description                |
-| ------------------ | -------------------------- |
-| Static Pricing     | No change in price         |
-| Rule-Based Pricing | Price adjusted using rules |
-| ML-Based Pricing   | Price optimized using ML   |
+* Identified **critical pricing patterns**
+* Provided foundation for pricing strategies
 
 ---
 
-### 🚀 Key Insights
+🔹 Milestone 4: Baseline Pricing Engine
 
-* Demand decreases when price increases (price sensitivity)
-* Weekend sales are higher
-* Low inventory leads to higher pricing opportunities
-* Few products generate majority of revenue
-* ML-based pricing improves revenue compared to static pricing
+ 🧠 Pricing Rules
+
+**Time-Based:**
+
+* Weekend → Price ↑ 10%
+
+**Inventory-Based:**
+
+* Inventory < 20 → Price ↑ 15%
+* Inventory > 100 → Price ↓ 10%
 
 ---
 
-## 🖥 Application / Demo
+💰 Revenue Comparison
 
-### 📊 Streamlit Dashboard Features
+* Original Revenue: ~41.05
+* New Revenue: ~44.68
 
-* User input panel
-* Price recommendation
-* Demand prediction
-* Revenue comparison
+📈 **Revenue Lift: 8.85%**
 
-### 📥 Inputs
+---
+ ✔ Result
+
+* Rule-based pricing improved revenue
+* Established baseline for ML comparison
+
+---
+
+🔹 Milestone 5: Machine Learning Models
+
+ 🤖 Models Used
+
+* XGBoost
+* LightGBM
+
+---
+
+ ⚙️ Model Setup
+
+* Target: Units Sold
+* Features:
+
+  * Price
+  * Inventory
+  * Time features
+* Data split: 80/20
+
+---
+
+ 📏 Performance
+
+| Model    | MAE    | RMSE   | R²     |
+| -------- | ------ | ------ | ------ |
+| XGBoost  | 0.0348 | 0.0442 | 0.9980 |
+| LightGBM | 0.0402 | 0.0505 | 0.9974 |
+
+---
+
+📈 Revenue Impact
+
+* Static Revenue: 79.45
+* ML Revenue: 92.35
+
+ Revenue Lift: 16.23%
+
+---
+
+ ✔ Result
+
+* ML significantly outperformed rule-based approach
+* Enabled **data-driven pricing decisions**
+
+---
+
+🔹 Milestone 6: Deployment & Dashboard
+
+🖥 Implementation
+
+* Built using Streamlit
+
+---
+
+ 🔧 Features
+
+Inputs:
 
 * Price
 * Inventory
 * Competitor Price
-* Demand Index
 * Date
 
-### 📤 Outputs
+Outputs:
 
 * Recommended Price
-* Expected Demand
+* Predicted Demand
 * Expected Revenue
 
 ---
 
-## ✅ Conclusion
+ 📊 Visualizations
 
-### 🎯 Final Outcomes
-
-* Built a complete pricing pipeline
-* Implemented rule-based and ML-based pricing
-* Achieved improved revenue performance
-
-### 📚 Learnings
-
-* Importance of EDA in pricing
-* Impact of demand and inventory on pricing
-* Practical use of ML in business problems
+* Revenue comparison
+* Demand trends
+* Model performance
 
 ---
 
-## 🔮 Future Improvements
+✔ Result
 
-* Add real-time data integration
-* Use advanced deep learning models
-* Include customer segmentation
-* Integrate competitor tracking APIs
+* Successfully deployed an **interactive pricing system**
+* Enabled real-time decision-making
 
 ---
 
-## ⚙️ How to Run the Project
+🏗 7. System Architecture
 
-### 🔧 Step 1: Clone Repository
 
-```bash
-git clone <your-repo-link>
-cd Dynamic_Pricing_App
-```
+                ┌──────────────┐
+                │ Raw Data     │
+                └──────┬───────┘
+                       ↓
+                ┌──────────────┐
+                │ Ingestion     │
+                └──────┬───────┘
+                       ↓
+                ┌──────────────┐
+                │ Processing    │
+                └──────┬───────┘
+                       ↓
+                ┌──────────────┐
+                │ EDA & Insights│
+                └──────┬───────┘
+                       ↓
+        ┌──────────────┴──────────────┐
+        ↓                             ↓
+┌──────────────┐             ┌──────────────┐
+│ Rule-Based    │             │ ML Models     │
+│ Pricing       │             │ (XGBoost)     │
+└──────┬───────┘             └──────┬───────┘
+       ↓                            ↓
+       └──────────┬─────────────────┘
+                  ↓
+          ┌──────────────┐
+          │ Pricing Engine│
+          └──────┬───────┘
+                 ↓
+          ┌──────────────┐
+          │ Dashboard     │
+          └──────────────┘
 
-### 🔧 Step 2: Install Dependencies
 
-```bash
-pip install -r requirements.txt
-```
+---
 
-### 🔧 Step 3: Run Application
+ 🔄 8. Pricing Strategy Flow
 
-```bash
-streamlit run app.py
+```text
+Input Data → Demand Prediction → Price Adjustment → Revenue Calculation → Output Recommendation
 ```
 
 ---
 
-## 📄 License
+📈 9. Key Results
 
-This project is licensed under the MIT License.
+* Rule-Based Pricing → **+8.85% revenue**
+* ML-Based Pricing → **+16.23% revenue**
+* XGBoost achieved highest accuracy
+* Dynamic pricing outperformed static pricing
+
+---
+
+✅ 10. Conclusion
+
+This project successfully demonstrates the effectiveness of **AI-driven dynamic pricing systems** in real-world retail scenarios.
+ 🎯 Achievements
+
+* Built end-to-end ML pipeline
+* Implemented rule-based and ML pricing
+* Achieved measurable revenue improvement
+* Developed a deployable application
+
+---
+
+📚 11. Learnings
+
+* Importance of EDA in business problems
+* Demand-price relationship (elasticity)
+* Real-world ML deployment
+* Data pipeline design
+
+---
+
+🔮 12. Future Scope
+
+* Real-time API integration (FastAPI)
+* Reinforcement learning for pricing
+* Customer segmentation
+* Competitor data scraping
+* Scalable cloud deployment
+
+
+
+
