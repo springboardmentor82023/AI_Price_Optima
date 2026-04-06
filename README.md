@@ -328,6 +328,8 @@ streamlit run app/app.py
 
 The Project is deployed using : Streamlit Cloud
 
+Deployed Link:- https://ai-price-optima-gurusivananda.streamlit.app/
+
 
 
 
