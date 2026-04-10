@@ -47,8 +47,7 @@ categorical_cols = [
     "product_id",
     "product_category",
     "customer_region",
-    "payment_method",
-    "demand_level"
+    "payment_method"
 ]
 
 for col in categorical_cols:
@@ -63,9 +62,8 @@ target = "quantity_sold"
 possible_features = [
     'price', 'discount_percent', 'inventory_level', 'rating', 'review_count',
     'product_id', 'product_category', 'customer_region', 'payment_method',
-    'demand_level', 'day', 'month', 'year', 'day_of_week', 'week_of_year', 'is_weekend'
+    'day', 'month', 'year', 'day_of_week', 'week_of_year', 'is_weekend'
 ]
-
 features = [col for col in possible_features if col in df.columns]
 print("Columns in dataset:\n", df.columns)
 
@@ -324,8 +322,12 @@ plt.grid(axis="y")
 plt.show()
 
 
-joblib.dump(xgb_model, "xgb_model.pkl")
-joblib.dump(encoders, "encoders.pkl")
-pickle.dump(xgb_model, open("model.pkl", "wb"))
-pickle.dump(encoders, open("encoders.pkl", "wb"))
-pickle.dump(possible_features, open("features.pkl", "wb"))
+# ✅ FIX 4: Cleaned up model saving (deleted pickle, kept joblib)
+model_dir = os.path.join(BASE_DIR, "..", "models")
+os.makedirs(model_dir, exist_ok=True) # Creates a 'models' folder if it doesn't exist
+
+joblib.dump(xgb_model, os.path.join(model_dir, "xgb_model.pkl"))
+joblib.dump(encoders, os.path.join(model_dir, "encoders.pkl"))
+joblib.dump(possible_features, os.path.join(model_dir, "features.pkl"))
+
+print(f"\nModels and encoders saved to {model_dir}")
